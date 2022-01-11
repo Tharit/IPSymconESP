@@ -7,8 +7,6 @@ class ESPDevice extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        $this->RequireParent('{3CFF0FD9-E306-41DB-9B5A-9D06D38576C3}'); // MQTT Server
-
         $this->ConnectParent('{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}');
 
         // properties
