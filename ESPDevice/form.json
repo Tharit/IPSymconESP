@@ -11,12 +11,12 @@
                 "caption": "Status and Last Will Topic are relative to the main device topic"
             },
             {
-                "name": "Status Topic",
+                "name": "StatusTopic",
                 "type": "ValidationTextBox",
                 "caption": "MQTT Status Topic"
             },
             {
-                "name": "Last Will Topic",
+                "name": "LastWillTopic",
                 "type": "ValidationTextBox",
                 "caption": "MQTT LWT Topic"
             }
