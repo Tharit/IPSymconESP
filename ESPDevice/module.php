@@ -11,6 +11,8 @@ class ESPDevice extends IPSModule
 
         // properties
         $this->RegisterPropertyString('Topic', '');
+        $this->RegisterPropertyString('StatusTopic', 'STATUS');
+        $this->RegisterPropertyString('LastWillTopic', 'LWT');
 
         // variables
         $this->RegisterVariableBoolean("Connected", "Connected");
@@ -20,6 +22,15 @@ class ESPDevice extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
+
+        $lwtTopic = $this->ReadPropertyString('LastWillTopic');
+        if(!$lwtTopic) {
+            $this->SetPropertyString('LastWillTopic', '/LWT');
+        }
+        $statusTopic = $this->ReadPropertyString('StatusTopic');
+        if(!$statusTopic) {
+            $this->SetPropertyString('StatusTopic', '/STATUS');
+        }
 
         $topic = $this->ReadPropertyString('Topic');
         $this->SetReceiveDataFilter('.*' . $topic . '.*');
@@ -36,10 +47,12 @@ class ESPDevice extends IPSModule
         $Buffer = $data;
 
         $topic = $this->ReadPropertyString('Topic');
-        
-        if($Buffer->Topic === $topic . "/LWT") {
+        $lwtTopic = $this->ReadPropertyString('LastWillTopic');
+        $statusTopic = $this->ReadPropertyString('StatusTopic');
+
+        if($Buffer->Topic === $topic . '/' . $lwtTopic) {
             $this->SetValue("Connected", $Buffer->Payload === 'Online' ? true : false);
-        } else if($Buffer->Topic === $topic . "/STATUS") {
+        } else if($Buffer->Topic === $topic . '/' . $statusTopic) {
             $values = json_decode($Buffer->Payload, true);
             foreach($values as $key => $value) {
                 if(($key === 'Actuators' || $key === 'Sensors') &&

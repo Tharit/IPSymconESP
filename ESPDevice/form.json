@@ -4,7 +4,21 @@
             {
                 "name": "Topic",
                 "type": "ValidationTextBox",
-                "caption": "MQTT Topic"
+                "caption": "MQTT Device Topic"
+            },
+            {
+                "type": "Label",
+                "caption": "Status and Last Will Topic are relative to the main device topic"
+            },
+            {
+                "name": "Status Topic",
+                "type": "ValidationTextBox",
+                "caption": "MQTT Status Topic"
+            },
+            {
+                "name": "Last Will Topic",
+                "type": "ValidationTextBox",
+                "caption": "MQTT LWT Topic"
             }
         ]
 }
