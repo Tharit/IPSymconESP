@@ -48,7 +48,7 @@ class ESPDevice extends IPSModule
                         $this->UpdateValue($key2, $value2, $key === 'Sensors');
                     }
                 } else {
-                    $this->UpdateValue($key2, $value2);
+                    $this->UpdateValue($key, $value);
                 }
             }
         }
