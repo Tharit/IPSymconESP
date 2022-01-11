@@ -1,0 +1,16 @@
+{
+	"id": "{64F3AF54-F1FA-41C5-B77F-E0056F27309C}",
+	"name": "ESPDevice",
+	"type": 3,
+	"vendor": "Espressif",
+	"aliases": 
+	[
+		"ESP32",
+        "ESP8266"
+	],
+	"parentRequirements": ["{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}"],
+	"childRequirements": [],
+	"implemented": ["{DBDA9DF7-5D04-F49D-370A-2B9153D00D9B}"],
+	"prefix": "ESP",
+    "url": "https://github.com/thart/IPSymconESP"
+}

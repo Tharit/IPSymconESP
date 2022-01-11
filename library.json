@@ -1,0 +1,12 @@
+{
+    "id": "{B7E3D6E8-FE46-4FC8-96C7-4B590C831A90}",
+    "name": "ESP",
+    "author": "Martin Kleinhans",
+    "url": "https://github.com/thart/IPSymconESP",
+    "compatibility": {
+        "version": "6.0"
+    },
+    "version": "1.0",
+    "build": 1,
+    "date": 25
+}
