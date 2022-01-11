@@ -63,7 +63,7 @@ class ESPDevice extends IPSModule
         $Server['PacketType'] = 3;
         $Server['QualityOfService'] = 0;
         $Server['Retain'] = false;
-        $Server['Topic'] = $this->ReadPropertyString('Topic') + '/CMD/' + $Ident;
+        $Server['Topic'] = $this->ReadPropertyString('Topic') . '/CMD/' . $Ident;
         $Server['Payload'] = $Value;
         $ServerJSON = json_encode($Server, JSON_UNESCAPED_SLASHES);
         $resultServer = @$this->SendDataToParent($ServerJSON);
