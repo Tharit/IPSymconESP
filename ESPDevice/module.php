@@ -39,21 +39,33 @@ class ESPDevice extends IPSModule
         
         if($Buffer->Topic === $topic . "/LWT") {
             $this->SetValue("Connected", $Buffer->Payload === 'Online' ? true : false);
-        } else if($Buffer->Topic === $topic . "/SENSOR") {
+        } else if($Buffer->Topic === $topic . "/STATUS") {
             $values = json_decode($Buffer->Payload);
             foreach($values as $key => $value) {
-                $type = gettype($value);
-                if($type === 'integer' || $type === 'float') {
-                    $this->RegisterVariableFloat($key, $key);
-                } else if($type === 'boolean') {
-                    $this->RegisterVariableBoolean($key, $key, '~Switch');
-                    $this->EnableAction($key);
+                if(($key === 'Actuators' || $key === 'Sensors') &&
+                    is_array($value)) {
+                    foreach($value as $key2 => $value2) {
+                        $this->UpdateValue($key2, $value2, $key === 'Sensors');
+                    }
                 } else {
-                    $this->RegisterVariableString($key, $key);
+                    $this->UpdateValue($key2, $value2);
                 }
-                $this->SetValue($key, $value);
             }
         }
+    }
+
+    private function UpdateValue($key, $value, $readonly = true) {
+        if($type === 'integer' || $type === 'float') {
+            $this->RegisterVariableFloat($key, $key);
+        } else if($type === 'boolean') {
+            $this->RegisterVariableBoolean($key, $key, $readonly ? '': '~Switch');
+        } else {
+            $this->RegisterVariableString($key, $key);
+        }
+        if(!$readonly) {
+            $this->EnableAction($key);
+        }
+        $this->SetValue($key, $value);
     }
 
     public function RequestAction($Ident, $Value)
