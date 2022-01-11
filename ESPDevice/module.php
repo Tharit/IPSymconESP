@@ -31,7 +31,7 @@ class ESPDevice extends IPSModule
         $this->SendDebug('JSON', $JSONString, 0);
         if (empty($this->ReadPropertyString('Topic'))) return;
 
-        $data = json_decode($JSONString);
+        $data = json_decode($JSONString, true);
 
         $Buffer = $data;
 
