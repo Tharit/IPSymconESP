@@ -31,7 +31,7 @@ class ESPDevice extends IPSModule
         $this->SendDebug('JSON', $JSONString, 0);
         if (empty($this->ReadPropertyString('Topic'))) return;
 
-        $data = json_decode($JSONString, true);
+        $data = json_decode($JSONString);
 
         $Buffer = $data;
 
@@ -40,7 +40,7 @@ class ESPDevice extends IPSModule
         if($Buffer->Topic === $topic . "/LWT") {
             $this->SetValue("Connected", $Buffer->Payload === 'Online' ? true : false);
         } else if($Buffer->Topic === $topic . "/STATUS") {
-            $values = json_decode($Buffer->Payload);
+            $values = json_decode($Buffer->Payload, true);
             foreach($values as $key => $value) {
                 if(($key === 'Actuators' || $key === 'Sensors') &&
                     is_array($value)) {
