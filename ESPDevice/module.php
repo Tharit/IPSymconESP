@@ -69,7 +69,7 @@ class ESPDevice extends IPSModule
 
     private function UpdateValue($key, $value, $readonly = true) {
         $type = gettype($value);
-        if($type === 'integer' || $type === 'float') {
+        if($type === 'integer' || $type === 'double') {
             $this->RegisterVariableFloat($key, $key);
         } else if($type === 'boolean') {
             $this->RegisterVariableBoolean($key, $key, $readonly ? '': '~Switch');
