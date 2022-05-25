@@ -10,6 +10,7 @@ class ESPDevice extends IPSModule
         $this->ConnectParent('{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}');
 
         // properties
+        $this->RegisterPropertyBoolean('RetainActuatorValues', false);
         $this->RegisterPropertyString('Topic', '');
         $this->RegisterPropertyString('StatusTopic', 'STATUS');
         $this->RegisterPropertyString('LastWillTopic', 'LWT');
@@ -88,7 +89,7 @@ class ESPDevice extends IPSModule
         $Server['DataID'] = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
         $Server['PacketType'] = 3;
         $Server['QualityOfService'] = 0;
-        $Server['Retain'] = false;
+        $Server['Retain'] = $this->ReadPropertyBoolean('RetainActuatorValues');
         $Server['Topic'] = $this->ReadPropertyString('Topic') . '/CMD/' . $Ident;
         $Server['Payload'] = json_encode($Value);
         $ServerJSON = json_encode($Server, JSON_UNESCAPED_SLASHES);

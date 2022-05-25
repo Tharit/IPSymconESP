@@ -19,6 +19,15 @@
                 "name": "LastWillTopic",
                 "type": "ValidationTextBox",
                 "caption": "MQTT LWT Topic"
+            },
+            {
+                "name": "RetainActuatorValues",
+                "type": "CheckBox",
+                "caption": "Retain requested actuator values"
+            },
+            {
+                "type": "Label",
+                "caption": "Publishing values as retained will result in values being automatically reapplied on device reconnect"
             }
         ]
 }
